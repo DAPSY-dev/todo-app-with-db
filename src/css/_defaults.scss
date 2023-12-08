@@ -1,0 +1,12 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 32px 0;
+    background-color: var(--color-dark-200);
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: var(--color-light-200);
+}
