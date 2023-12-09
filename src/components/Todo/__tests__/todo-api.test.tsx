@@ -8,7 +8,7 @@ import {
     useGetTodosQuery,
     useAddTodoMutation,
     useRemoveTodoMutation,
-    useToggleTodoCompletedMutation,
+    useUpdateTodoMutation,
 } from "../../../store";
 import { TodoItemBaseType, TodoItemType } from "../../TodoItem";
 
@@ -111,10 +111,10 @@ describe("Todo - API testing", () => {
         });
     });
 
-    test("useToggleTodoCompletedMutation", async () => {
-        const endpointName = "toggleTodoCompleted";
+    test("useUpdateTodoMutation", async () => {
+        const endpointName = "updateTodo";
 
-        const { result } = renderHook(() => useToggleTodoCompletedMutation(), { wrapper: Wrapper });
+        const { result } = renderHook(() => useUpdateTodoMutation(), { wrapper: Wrapper });
 
         await act(() => result.current[0](todoItem));
 

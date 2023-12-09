@@ -25,17 +25,15 @@ export const todoApi = createApi({
             }),
             invalidatesTags: ["Todo"],
         }),
-        toggleTodoCompleted: builder.mutation({
+        updateTodo: builder.mutation({
             query: (todo) => ({
                 url: `${SERVER_TODOS_PATH}/${todo.id}`,
                 method: "PATCH",
-                body: {
-                    completed: !todo.completed,
-                },
+                body: todo,
             }),
             invalidatesTags: ["Todo"],
         }),
     }),
 });
 
-export const { useGetTodosQuery, useAddTodoMutation, useRemoveTodoMutation, useToggleTodoCompletedMutation } = todoApi;
+export const { useGetTodosQuery, useAddTodoMutation, useRemoveTodoMutation, useUpdateTodoMutation } = todoApi;

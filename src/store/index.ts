@@ -11,9 +11,4 @@ export const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export {
-    useGetTodosQuery,
-    useAddTodoMutation,
-    useRemoveTodoMutation,
-    useToggleTodoCompletedMutation,
-} from "./api/todo";
+export { useGetTodosQuery, useAddTodoMutation, useRemoveTodoMutation, useUpdateTodoMutation } from "./api/todo";

@@ -1,5 +1,5 @@
 import React, { useId } from "react";
-import { useRemoveTodoMutation, useToggleTodoCompletedMutation } from "../../store";
+import { useRemoveTodoMutation, useUpdateTodoMutation } from "../../store";
 
 export type TodoItemBaseType = {
     text: string;
@@ -18,14 +18,26 @@ export type TodoItemProps = {
 
 const TodoItem: React.FC<TodoItemProps> = ({ isEmpty, item, children }) => {
     const [removeTodo, removeTodoResult] = useRemoveTodoMutation();
-    const [toggleTodoCompleted, toggleTodoCompletedResult] = useToggleTodoCompletedMutation();
+    const [updateTodo, updateTodoResult] = useUpdateTodoMutation();
     const checkboxId = useId();
 
     if (isEmpty) {
         return <li className="todo-item">{children}</li>;
     }
 
-    return !item ? null : (
+    if (!item) {
+        return null;
+    }
+
+    const handleToggleCompleted = () => {
+        const newTodo = {
+            ...item,
+            completed: !item.completed,
+        };
+        updateTodo(newTodo);
+    };
+
+    return (
         <li className="todo-item">
             <button
                 type="button"
@@ -38,9 +50,9 @@ const TodoItem: React.FC<TodoItemProps> = ({ isEmpty, item, children }) => {
             <input
                 type="checkbox"
                 id={checkboxId}
-                onChange={() => toggleTodoCompleted(item)}
+                onChange={handleToggleCompleted}
                 checked={item.completed}
-                disabled={toggleTodoCompletedResult.isLoading}
+                disabled={updateTodoResult.isLoading}
             />
             <label htmlFor={checkboxId}>{item.text}</label>
         </li>
